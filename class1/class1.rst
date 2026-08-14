@@ -128,6 +128,8 @@ During this class we will:
 
 
 
+**Class 1 - All modules**
+
 .. toctree::
    :maxdepth: 2
    :glob:

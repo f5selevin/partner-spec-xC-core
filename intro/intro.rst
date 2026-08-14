@@ -7,7 +7,6 @@ Please make sure you read them carefully.
 
 
 **Intro - All sections**
-
 .. toctree::
    :maxdepth: 2
    :glob:

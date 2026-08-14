@@ -1,68 +1,80 @@
-Lab 1 - Expose the application
-##############################
+Lab 1 - Create the Arcadia origin pools
+########################################
 
-For this lab, we will use the following configuration
+In this lab, you will identify the three Arcadia application endpoints provided by UDF and create one F5 Distributed Cloud origin pool for each endpoint.
 
-1. Create the Origin Pool targeting Arcadia public app
- 
-a) Web App & API Protection -> Load Balancers -> Origin Pool -> Add Origin Pool -> Fill the bellow data
+Discover the Arcadia endpoints
+==============================
 
-   .. table:: 
+1. In UDF, locate the component named **Arcadia - Cluster**.
+
+2. Open the **Access** menu for the component. Under **Access Types**, locate these three URLs:
+
+   * **Arcadia Origin Pool 1**
+   * **Arcadia Origin Pool 2**
+   * **Arcadia Origin Pool 3**
+
+3. Record each URL. You will use its hostname when you configure the corresponding origin pool.
+
+.. Screenshot placeholder: UDF Arcadia - Cluster access menu and the three URLs.
+
+Verify the Arcadia endpoints
+============================
+
+1. Open the **Arcadia Origin Pool 1** URL in a new browser tab.
+
+2. Confirm that **Arcadia Origin Pool 1** appears in the page header and footer.
+
+.. Screenshot placeholder: Arcadia Origin Pool 1 page.
+
+3. Open the **Arcadia Origin Pool 2** URL and confirm that **Arcadia Origin Pool 2** appears in the header and footer.
+
+.. Screenshot placeholder: Arcadia Origin Pool 2 page.
+
+4. Open the **Arcadia Origin Pool 3** URL and confirm that **Arcadia Origin Pool 3** appears in the header and footer.
+
+.. Screenshot placeholder: Arcadia Origin Pool 3 page.
+
+Create three origin pools
+=========================
+
+Repeat the following procedure for each Arcadia endpoint.
+
+1. In the F5 Distributed Cloud Console, go to **Web App & API Protection** -> **Load Balancers** -> **Origin Pools**.
+
+2. Click **Add Origin Pool** and configure the pool using the values below. For **DNS Name**, enter only the hostname from the matching UDF URL; do not include ``https://`` or a path.
+
+   .. table::
       :widths: auto
 
-      ==============================    ========================================================================================
+      ==============================    =========================================================
       Object                            Value
-      ==============================    ========================================================================================
-      **Name**                          arcadia-public-endpoint
-      
-      **Port**                          443 
-
+      ==============================    =========================================================
+      **Name**                          arcadia-origin-pool-1, arcadia-origin-pool-2, or arcadia-origin-pool-3
+      **Origin Server Type**            DNS Name
+      **DNS Name**                      Hostname from the corresponding UDF access URL
+      **Port**                          443
       **TLS**                           Enable
+      **Origin Server Verification**    Skip Verification
+      ==============================    =========================================================
 
-      **Origin Server Verification**    Skip Verification 
-      ==============================    ========================================================================================
+3. Under **Origin Servers**, click **Add Item**, enter the matching DNS name, and click **Apply**.
 
-b) In the same screen -> Origin Servers -> Add Item -> Fill the bellow data -> Apply -> Save and exit
+4. Click **Save and Exit**.
 
-   .. table:: 
-      :widths: auto
+5. Repeat these steps until all three origin pools exist.
 
-      ====================    ========================================================================================
-      Object                  Value
-      ====================    ========================================================================================
-      **DNS name**            $$hostArcadia$$
-      ====================    ========================================================================================
+.. Screenshot placeholder: completed origin pool configuration.
 
-   .. raw:: html   
+.. warning:: Skipping origin server certificate verification is appropriate for this lab environment only. In production, validate the origin certificate with a trusted CA or a configured certificate.
 
-      <script>c1m1l2a();</script>  
+Validate the lab
+================
 
-2. Create the HTTP LB
+Confirm that the following origin pools are listed in your namespace:
 
-a) Web App & API Protection -> Load Balancers -> HTTP Load Balancer -> Add HTTP Load Balancer -> Fill the bellow data -> Save and exit
+* ``arcadia-origin-pool-1``
+* ``arcadia-origin-pool-2``
+* ``arcadia-origin-pool-3``
 
-   .. table:: 
-      :widths: auto
-
-      ====================================    =================================================================================================
-      Object                                  Value
-      ====================================    =================================================================================================
-      **Name**                                arcadia-re-lb
-                     
-      **Domains**                             arcadia-re-$$makeId$$.workshop.emea.f5se.com
-
-      **Load Balancer Type**                  HTTP
-                                                                                 
-      **Automatically Manage DNS Records**    Enable 
-
-      **Origin Pools**                        Click **Add Item**, for the **Origin Pool** select $$namespace$$/arcadia-public-endpoint -> Apply
-      ====================================    =================================================================================================
-
-   .. raw:: html   
-
-      <script>c1m1l2b();</script>  
-
-3. So far, Arcadia is not protected but exposed all over the world on all F5XC RE. 
-Check your Arcadia application is exposed and reachable from the F5XC Global Network by browsing to :ext_link:`http://arcadia-re-$$makeId$$.workshop.emea.f5se.com`
-
-.. warning:: Some Service Providers have a very long recursive cache. It can take several minutes to get a DNS response. You can change your DNS server to 1.1.1.1 or 8.8.8.8 to fix that.
+You will attach all three origin pools to one HTTP load balancer in Lab 2.
