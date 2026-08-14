@@ -1,4 +1,4 @@
-Lab 1 - Malicious User Detection config
+Configure Malicious User Detection
 #######################################
 
 

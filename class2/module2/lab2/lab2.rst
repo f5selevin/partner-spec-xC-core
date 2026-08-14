@@ -1,5 +1,5 @@
-Lab 2 - Testing and Visibility
-##############################
+Test connectivity and review traffic visibility
+###############################################
 
 Now let's try again and make a transaction
 

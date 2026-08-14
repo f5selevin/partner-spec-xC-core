@@ -1,4 +1,4 @@
-Lab 1 - Routing configuration
+Configure application routing
 #############################
 
 

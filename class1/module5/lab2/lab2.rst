@@ -1,5 +1,5 @@
-Lab 2 - Testing
-###############
+Test Malicious User Detection
+#############################
 
 In order to test we will behave as a bad actor.
 
@@ -68,7 +68,7 @@ In order to test we will behave as a bad actor.
 
 5. Since the user has not logged in we will block it based on IP address go to the **Malicious Users** dashboard like in step 3 and you will be able to follow and indetify these attacks
 
-6. Right now your IP is being blocked temporarily and we need to allow it in order to continue with the lab. 
+6. Your IP address is now blocked temporarily. Add it to the allow list before continuing.
 
    Go to the **Malicious Users** dashboard and click on the IP identifier ( it should look similar to this **IP-156.33.44.55** ) -> Click **Add To Allow List** -> Apply -> Apply -> Save and Exit
 

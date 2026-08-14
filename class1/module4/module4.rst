@@ -7,7 +7,7 @@ This mechanism is continually updating the database and is able to flag many dir
 
 
 
-**Module 4 - All sections**
+**Hands-on exercises**
 
 .. toctree::
    :maxdepth: 1

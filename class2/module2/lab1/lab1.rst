@@ -1,5 +1,5 @@
-Lab 1 - Inter DC communication config
-#####################################
+Configure connectivity between environments
+###########################################
 
 After migrating parts of the application and specially the Stocks Transaction service it is required to provide connectivity from the cloud environment to the on prem **Users** service.
 

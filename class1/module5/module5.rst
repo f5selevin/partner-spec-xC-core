@@ -10,7 +10,7 @@ Based on these identifires we can track user behaviour and visualise it while at
 
 
 
-**Module 5 - All sections**
+**Hands-on exercises**
 
 .. toctree::
    :maxdepth: 1

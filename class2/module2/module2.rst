@@ -8,7 +8,7 @@ Do you know now why the previous transaction didn't work ?
 .. image:: ./pictures/Slide1.png
    :align: center
 
-**Module 2 - All sections**
+**Hands-on exercises**
 
 .. toctree::
    :maxdepth: 1

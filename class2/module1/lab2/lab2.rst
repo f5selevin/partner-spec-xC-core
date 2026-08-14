@@ -1,5 +1,5 @@
-Lab 2 - Testing and Visibility
-##############################
+Test routing and review traffic visibility
+##########################################
 
 In order to make sure all is going to the correct endpoint we will need to relogin into the application and look at the relevant dashboards.
 

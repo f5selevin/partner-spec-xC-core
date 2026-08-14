@@ -1,5 +1,5 @@
-Lab 1 - Waf config
-##################
+Configure the Web Application Firewall
+######################################
 
 
 1. Create the **Web Application Firewall policy**

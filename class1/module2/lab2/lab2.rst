@@ -1,5 +1,5 @@
-Lab 2 - Testing and Visibility
-##############################
+Test the firewall and review security events
+############################################
 
 1. First lets try and attack out application with an **XSS attack** using the bellow URL. Th attack will be blocked and a **support ID** will be provided. Save the **support ID** as it will be used in the next step.
 

@@ -1,7 +1,7 @@
-Lab 2 - Publish and test the application
+Publish and test the application
 ########################################
 
-In this lab, you will publish the Arcadia application with an F5 Distributed Cloud HTTP load balancer. The load balancer will distribute requests across the three origin pools by using the round-robin algorithm.
+In this exercise, you will publish the Arcadia Crypto application with an F5 Distributed Cloud HTTP load balancer. The load balancer will distribute requests across the three origin pools by using the round-robin algorithm.
 
 Create the HTTP load balancer
 =============================
@@ -56,9 +56,9 @@ Test round-robin distribution
 
 4. Refresh the page several times. Confirm that the header and footer rotate among:
 
-   * **Arcadia Origin Pool 1**
-   * **Arcadia Origin Pool 2**
-   * **Arcadia Origin Pool 3**
+   * **Arcadia Crypto Origin Pool 1**
+   * **Arcadia Crypto Origin Pool 2**
+   * **Arcadia Crypto Origin Pool 3**
 
 .. Screenshot placeholder: responses showing the other origin pool names.
 
@@ -66,12 +66,12 @@ Test round-robin distribution
 
 .. warning:: Some service providers retain recursive DNS responses for several minutes. If the domain does not resolve after the load balancer becomes active, try a resolver such as ``1.1.1.1`` or ``8.8.8.8``.
 
-Validate the lab
-================
+Verify your configuration
+=========================
 
-The lab is complete when:
+The exercise is complete when:
 
-* ``$$namespace$$.spec-core.f5se.com`` loads the Arcadia application.
+* ``$$namespace$$.spec-core.f5se.com`` loads the Arcadia Crypto application.
 * Repeated requests display more than one origin pool name.
 * All three origin pool names appear after multiple requests.
 

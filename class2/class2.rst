@@ -1,11 +1,11 @@
-Class 2 - Multi Cloud Networking
-################################
+Multi-Cloud Networking
+######################
 
-Welcome to the Multi Cloud Networking ( MCN ) F5 XC class.
+This section covers F5 Distributed Cloud Multi-Cloud Networking (MCN).
 
-.. note:: If you have reached this stage after finishing **Class 1** you can simply continue if not go to the **1 Click** section of **Class 1** and run throught the configuration.
+.. note:: If you completed the application delivery exercises, continue with the steps below. Otherwise, use **1 Click Config** to prepare the required configuration.
 
-For this lab, we will use the **Arcadia Crypto** application.
+These exercises use the **Arcadia Crypto** application.
 
 This application is a modern application simulating a crypto trading platform app where you can buy and sell crypto currency.
 
@@ -23,7 +23,7 @@ Our on prem infrastracture is no longer able to handle the load of our applicati
 
 We need to quickly expand and this can be done with any of the cloud providers while keeping the same level of application security and workflows.
 
-During this class we will:
+In this section, you will:
 
 * Explore expanding parts of our service to AWS
 * Providing connectivity for communication between different data centers
@@ -33,7 +33,7 @@ During this class we will:
 .. image:: ./module1/pictures/class1.gif
    :align: center
 
-.. note:: Before you procced to the lab it is mandatory to enter the email that you have joined the UDF with in order to populate any dynamic content. If all good the button will turn green.
+.. note:: Before continuing, enter the email address you used to join the UDF deployment. This is required to populate dynamic content. The button turns green when the information loads successfully.
 
 .. raw:: html
 
@@ -133,7 +133,7 @@ During this class we will:
 
 
 
-**Class 2 - All modules**
+**Workshop topics**
 
 .. toctree::
    :maxdepth: 2

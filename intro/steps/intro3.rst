@@ -8,7 +8,7 @@ If you reached this step you should already have received an email from F5XC req
    .. image:: ../pictures/Slide5.png
       :align: center
 
-2. In order to access the F5XC platform you need to follow this link :ext_link:`https://f5-emea-workshop.console.ves.volterra.io/`  .
+2. In order to access the F5XC platform you need to follow this link :ext_link:`https://labs-msp-c-core.console.ves.volterra.io/`  .
 
    Enter your **email** and **new password**.
 

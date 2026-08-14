@@ -12,7 +12,7 @@ In this section, we will create the configuration which will be able to route to
    :align: center
 
 
-**Module 1 - All sections**
+**Hands-on exercises**
 
 .. toctree::
    :maxdepth: 1
