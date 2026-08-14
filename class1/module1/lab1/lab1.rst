@@ -8,32 +8,36 @@ Discover the Arcadia Crypto endpoints
 
 1. In UDF, locate the component named **Arcadia Crypto - Cluster**.
 
-2. Open the **Access** menu for the component. Under **Access Types**, locate these three URLs:
+2. Open the **Details** menu for the component. Under **Access Methods**, locate these three URLs:
 
-   * **Arcadia Crypto Origin Pool 1**
-   * **Arcadia Crypto Origin Pool 2**
-   * **Arcadia Crypto Origin Pool 3**
+   .. react:: DeploymentAccessMethods
+      :deployment: Arcadia Crypto - Cluster
+      :access-methods: Arcadia Crypto Origin Pool 1, Arcadia Crypto Origin Pool 2, Arcadia Crypto Origin Pool 3
 
 3. Record each URL. You will use its hostname when you configure the corresponding origin pool.
 
-.. Screenshot placeholder: UDF Arcadia Crypto - Cluster access menu and the three URLs.
+.. image:: ../pictures/udf-arcadia-crypto-access-links.png
+   :align: center
 
 Verify the Arcadia Crypto endpoints
 ===================================
 
-1. Open the **Arcadia Crypto Origin Pool 1** URL in a new browser tab.
+1. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 1` in a new browser tab.
 
 2. Confirm that **Arcadia Crypto Origin Pool 1** appears in the page header and footer.
 
-.. Screenshot placeholder: Arcadia Crypto Origin Pool 1 page.
+.. image:: ../pictures/arcadia-crypto-op1.png
+   :align: center
 
-3. Open the **Arcadia Crypto Origin Pool 2** URL and confirm that **Arcadia Crypto Origin Pool 2** appears in the header and footer.
+3. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 2` and confirm that **Arcadia Crypto Origin Pool 2** appears in the header and footer.
 
-.. Screenshot placeholder: Arcadia Crypto Origin Pool 2 page.
+.. image:: ../pictures/arcadia-crypto-op2.png
+   :align: center
 
-4. Open the **Arcadia Crypto Origin Pool 3** URL and confirm that **Arcadia Crypto Origin Pool 3** appears in the header and footer.
+4. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 3` and confirm that **Arcadia Crypto Origin Pool 3** appears in the header and footer.
 
-.. Screenshot placeholder: Arcadia Crypto Origin Pool 3 page.
+.. image:: ../pictures/arcadia-crypto-op3.png
+   :align: center
 
 Create three origin pools
 =========================
