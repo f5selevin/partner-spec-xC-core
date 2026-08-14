@@ -1,7 +1,7 @@
 Publish and test the application
 ########################################
 
-In this exercise, you will publish the Arcadia Crypto application with an F5 Distributed Cloud HTTP load balancer. The load balancer will distribute requests across the three origin pools by using the round-robin algorithm.
+In this exercise, you will publish the Arcadia Crypto application with an F5 Distributed Cloud HTTP load balancer. The origin pool will distribute requests across its three origin servers by using the round-robin algorithm.
 
 Create the HTTP load balancer
 =============================
@@ -24,24 +24,16 @@ Create the HTTP load balancer
 
 .. Screenshot placeholder: basic HTTP load balancer configuration.
 
-Add the origin pools
-====================
+Add the origin pool
+===================
 
 1. In the load balancer's **Origin Pools** section, click **Add Item**.
 
-2. Add the following three origin pools:
+2. Select ``$$namespace$$/op1-arcadia-crypto``.
 
-   * ``$$namespace$$/arcadia-origin-pool-1``
-   * ``$$namespace$$/arcadia-origin-pool-2``
-   * ``$$namespace$$/arcadia-origin-pool-3``
+3. Click **Apply**, and then click **Save and Exit**.
 
-3. Set the load-balancing algorithm to **Round Robin**.
-
-4. Give each origin pool the same weight and priority, if those fields are displayed.
-
-5. Click **Apply**, and then click **Save and Exit**.
-
-.. Screenshot placeholder: all three origin pools configured with Round Robin.
+.. Screenshot placeholder: the Arcadia Crypto origin pool attached to the load balancer.
 
 Test round-robin distribution
 =============================
@@ -50,7 +42,7 @@ Test round-robin distribution
 
 2. Browse to :ext_link:`http://$$namespace$$.spec-core.f5se.com`.
 
-3. Note the origin pool name displayed in the page header and footer.
+3. Note the origin server name displayed in the page header and footer.
 
 .. Screenshot placeholder: application response from the first origin pool.
 
@@ -72,6 +64,6 @@ Verify your configuration
 The exercise is complete when:
 
 * ``$$namespace$$.spec-core.f5se.com`` loads the Arcadia Crypto application.
-* Repeated requests display more than one origin pool name.
-* All three origin pool names appear after multiple requests.
+* Repeated requests display more than one origin server name.
+* All three origin server names appear after multiple requests.
 

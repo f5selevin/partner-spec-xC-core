@@ -1,7 +1,7 @@
-Create the Arcadia Crypto origin pools
-#########################################
+Create the Arcadia Crypto origin pool
+######################################
 
-In this exercise, you will identify the three Arcadia Crypto application endpoints provided by UDF and create one F5 Distributed Cloud origin pool for each endpoint.
+In this exercise, you will identify the three Arcadia Crypto application endpoints provided by UDF and add all three endpoints as origin servers in one F5 Distributed Cloud origin pool.
 
 Discover the Arcadia Crypto endpoints
 =====================================
@@ -14,7 +14,7 @@ Discover the Arcadia Crypto endpoints
       :deployment: Arcadia Crypto - Cluster
       :access-methods: Arcadia Crypto Origin Pool 1, Arcadia Crypto Origin Pool 2, Arcadia Crypto Origin Pool 3
 
-3. Record each URL. You will use its hostname when you configure the corresponding origin pool.
+3. Record each URL. You will use all three hostnames when you configure the origin servers.
 
 .. image:: ../pictures/udf-arcadia-crypto-access-links.png
    :align: center
@@ -24,29 +24,56 @@ Verify the Arcadia Crypto endpoints
 
 1. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 1` in a new browser tab.
 
-2. Confirm that **Arcadia Crypto Origin Pool 1** appears in the page header and footer.
+2. Confirm that **Origin Pool 1** appears in the page header and footer.
 
 .. image:: ../pictures/arcadia-crypto-op1.png
    :align: center
 
-3. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 2` and confirm that **Arcadia Crypto Origin Pool 2** appears in the header and footer.
+3. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 2` and confirm that **Origin Pool 2** appears in the header and footer.
 
 .. image:: ../pictures/arcadia-crypto-op2.png
    :align: center
 
-4. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 3` and confirm that **Arcadia Crypto Origin Pool 3** appears in the header and footer.
+4. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 3` and confirm that **Origin Pool 3** appears in the header and footer.
 
 .. image:: ../pictures/arcadia-crypto-op3.png
    :align: center
 
-Create three origin pools
-=========================
+Create one origin pool with three origin servers
+================================================
 
-Repeat the following procedure for each Arcadia Crypto endpoint.
+An origin pool in F5 Distributed Cloud (XC) is a logical group of backend servers, called origins, that host an application or service. An HTTP load balancer sends client requests to an origin pool instead of connecting directly to a specific backend. This separation allows the backend destinations to change without requiring changes to the application's public endpoint.
 
-1. In the F5 Distributed Cloud Console, go to **Web App & API Protection** -> **Load Balancers** -> **Origin Pools**.
+An origin pool defines the backend server addresses, service port, TLS configuration, load-balancing algorithm, and health checks used by XC. For a pool with multiple origins, XC applies the configured algorithm across origins that pass their health checks. An origin that fails a health check is removed from traffic distribution until it meets the configured health criteria again.
 
-2. Click **Add Origin Pool** and configure the pool using the values below. For **DNS Name**, enter only the hostname from the matching UDF URL; do not include ``https://`` or a path.
+In this lab, all three Arcadia Crypto endpoints are added to one origin pool as separate origin servers. In the next exercise, you will attach this origin pool to an HTTP load balancer.
+
+1. On the F5 Distributed Cloud Console home page, select the **Web App & API Protection** tile.
+
+.. image:: ../pictures/welcome-web-app-and-api-protection.png
+   :align: center
+
+2. Select **Namespaces (1)**, and then select your namespace (2): ``$$namespace$$``.
+
+.. image:: ../pictures/welcome-ns-select.png
+   :align: center
+
+3. Click **Load Balancers (1)** -> **Origin Pools (2)**, and then click **Add Origin Pool (3)**.
+
+.. image:: ../pictures/op-add.png
+   :align: center
+
+4. On the **Origin Pool** configuration page, fill in the following fields:
+
+   * **Name (1):** op1-arcadia-crypto
+   * **Port (2):** 443
+   * **TLS (3):** Enable
+5. Under **Origin Servers**, click **Add Item (4)**.
+
+.. image:: ../pictures/op-details-1.png
+   :align: center
+
+6. Configure the first origin server with the values below. For **DNS Name**, enter only the hostname from the first UDF URL; do not include ``https://`` or a path.
 
    .. table::
       :widths: auto
@@ -54,31 +81,27 @@ Repeat the following procedure for each Arcadia Crypto endpoint.
       ==============================    =========================================================
       Object                            Value
       ==============================    =========================================================
-      **Name**                          arcadia-origin-pool-1, arcadia-origin-pool-2, or arcadia-origin-pool-3
       **Origin Server Type**            DNS Name
-      **DNS Name**                      Hostname from the corresponding UDF access URL
-      **Port**                          443
-      **TLS**                           Enable
+      **DNS Name**                      Hostname from the Arcadia Crypto Origin Pool 1 URL
       **Origin Server Verification**    Skip Verification
       ==============================    =========================================================
 
-3. Under **Origin Servers**, click **Add Item**, enter the matching DNS name, and click **Apply**.
+7. Click **Apply** to add the origin server.
 
-4. Click **Save and Exit**.
+8. Repeat steps 5 through 7 for the other two UDF URLs:
 
-5. Repeat these steps until all three origin pools exist.
+   * Add the hostname from the **Arcadia Crypto Origin Pool 2** URL.
+   * Add the hostname from the **Arcadia Crypto Origin Pool 3** URL.
 
-.. Screenshot placeholder: completed origin pool configuration.
+9. Confirm that the origin pool contains three origin servers, and then click **Save and Exit**.
+
+.. Screenshot placeholder: completed origin pool with three origin servers.
 
 .. warning:: Skipping origin server certificate verification is appropriate for this workshop environment only. In production, validate the origin certificate with a trusted CA or a configured certificate.
 
 Verify your configuration
 =========================
 
-Confirm that the following origin pools are listed in your namespace:
+Confirm that ``op1-arcadia-crypto`` is listed in your namespace and contains three origin servers.
 
-* ``arcadia-origin-pool-1``
-* ``arcadia-origin-pool-2``
-* ``arcadia-origin-pool-3``
-
-In the next exercise, you will attach all three origin pools to one HTTP load balancer.
+In the next exercise, you will attach this origin pool to an HTTP load balancer.
