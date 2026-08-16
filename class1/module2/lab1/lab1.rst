@@ -1,46 +1,48 @@
 Configure the Web Application Firewall
 ######################################
 
-
-1. Create the **Web Application Firewall policy**
+Create the Web Application Firewall
+=======================================
  
-a) Web App & API Protection -> App Firewall -> Add App Firewall -> Fill the bellow data -> Save and Exit
+Click **Web App & API Protection -> App Firewall (1)-> Add App Firewall (2)**
+   .. image:: ../pictures/app-firewall.png
+      :align: center
 
+Fill the bellow data and click **Add App Firewall (3)**
    .. table:: Waf Policy
       :widths: auto
 
       ==============================    ========================================================================================
       Object                            Value
       ==============================    ========================================================================================
-      **Name**                          arcadia-waf
+      **Name (1)**                          arcadia-crypto-waf
       
-      **Enforcement Mode**              blocking
+      **Enforcement Mode (2)**              blocking
       ==============================    ========================================================================================
 
 
-   .. raw:: html   
+   .. image:: ../pictures/app-firewall-details-1.png
+      :align: center
 
-      <script>c1m2l1a();</script>  
+Attach the Web Application Firewall to the HTTP Load Balancer
+============================================================================
 
+a) Click **Web App & API Protection -> Load Balancers (1) -> HTTP Load Balancer (1) -> Click the ... (3) in the created load balancer row**
 
-2. Attach the **Web Application Firewall policy** to the **HTTP Load Balancer**
+   .. image:: ../pictures/lb-list.png
 
-a) Web App & API Protection -> Load Balancers -> HTTP Load Balancer -> Click the 3 dots under the **arcadia-re-lb** row -> Manage Configuration -> Edit Configuration -> Fill the bellow data -> Save and Exit
+b) Click **Manage Configuration (1)** in the appeared menu
 
+   .. image:: ../pictures/lb-list-manage.png
+      :align: center
 
-   .. table:: Attach WAF policy
-      :widths: auto
+c) In the appeared page click **Edit Configuration (1)**
 
-      ==================================    ========================================================================================
-      Object                                Value
-      ==================================    ========================================================================================
-      **Web Application Firewall (WAF)**    Enable
-   
-      **Enable**                            $$namespace$$/arcadia-waf
-      ==================================    ========================================================================================
+   .. image:: ../pictures/lb-list-edit.png
+      :align: center
 
-   .. raw:: html   
+d) In the appeared page scroll to the **Web Application Firewall (1)** section, select **Enable (2)** for **Web Application Firewall (WAF)** and select the created WAF ``$$namespace$$/arcadia-crypto-waf`` **(3)**. Click **Save Http Load Balancer (4)** to apply the changes.
 
-      <script>c1m2l1b();</script>
-
+   .. image:: ../pictures/lb-waf-assign.png
+      :align: center
    

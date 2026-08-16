@@ -1,8 +1,8 @@
 Web Application Firewall
 ##############################
 
-In this section, we will protect our application with best of breed F5 XC Web Application Firewall.
-We will lear how to configure and investigate attacks.
+In this section, we will protect our application with the F5 XC Web Application Firewall.
+We will learn how to configure the firewall, test it with a simulated XSS attack, and investigate the resulting security events.
 
 **Hands-on exercises**
 

@@ -1,22 +1,60 @@
 Test the firewall and review security events
 ############################################
 
-1. First lets try and attack out application with an **XSS attack** using the bellow URL. Th attack will be blocked and a **support ID** will be provided. Save the **support ID** as it will be used in the next step.
+XSS Attack
+==========
+
+1. First let's try and attack our application with an **XSS attack** using the bellow URL. The attack will be blocked and a **support ID** will be provided. Save the **support ID** as it will be used in the next step.
 
 
-   :ext_link:`http://arcadia-re-$$makeId$$.workshop.emea.f5se.com/?a=%3Cscript%3Ealert(%27xss%27)`
+   :ext_link:`http://$$namespace$$.spec-core.f5se.com/?a=%3Cscript%3Ealert(%27xss%27)`
+
+2. The request will be blocked by WAF:
+   
+   .. image:: ../pictures/waf-block.png
+      :align: center
+
+3. Copy the **support ID (1)** from the blocked request message. You will need it in the next step to filter the security events.
+
+WAF Dashboard
+=============  
+
+1. Open the **Security** dashboard. Click **Web App & API Protection -> Overview -> Security (1)**
+   
+   .. image:: ../pictures/security-dashboard.png
+      :align: center
+
+2. Scoll down to tge **Delivery Resources (1)** section. Make sure that **HTTP LB (2)** is selected and click on the **arcadia-re-lb (3)** row.
+
+   .. image:: ../pictures/security-dashboard-delivery-resources.png
+      :align: center
+
+3. You sill see the security events **Dashboard**
+
+   .. image:: ../pictures/security-events.png
+      :align: center
 
 
+Filtering the security events
+=============================
+1. Click **Add Filter (1)**.  
 
-2. Let's look at the blocked attack
+.. image:: ../pictures/security-events-filter-1.png
+   :align: center
 
-a) Web App & API Protection -> Dashboards -> Security Dashboard -> Scrool down to the **Load Balancers** section and click on **arcadia-re-lb** -> Security Analytics
+2. Enter the ``req_id``as a filter field (1) and select Select **Assign a Custom Key (2)**:
+.. image:: ../pictures/security-events-filter-2.png
+   :align: center
 
-   Here you will me able to see all blocked attacks. 
+3. In the appeared menu select **In (1)** operation:
+.. image:: ../pictures/security-events-filter-3.png
+   :align: center
 
-3. If you want to filter a specific request that has been blocked
 
-a) On the current page -> Add Filter -> Enter req_id -> In -> Enter the previous support ID -> In case nothing is shown click on the Refresh button
+4. Paste the copied **support ID** from the previous step into the **Value (1)** field and click **Assign a Custom Value(s) (2)**.
+.. image:: ../pictures/security-events-filter-4.png
+   :align: center
 
-   Click the down arrow and you will see all the request details and why it has been blocked
-
+5. The security events will be filtered and you will see the blocked request with the **support ID** you used in the filter.
+.. image:: ../pictures/security-events-filter-res.png
+   :align: center
