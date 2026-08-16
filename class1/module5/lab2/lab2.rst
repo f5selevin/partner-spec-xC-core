@@ -24,38 +24,38 @@ In order to test we will behave as a bad actor.
 
         // A helper function to delay execution
         function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
 
         async function runRequests() {
-        const requests = [
-            {url: '/v1/stockt', method: 'POST', data: '{"symbol":"<script","transactionType":"buy","amount":1}' },
-            {url: '/v1/stockt', method: 'POST', data: '{"symbol":"ltc","transactionType":"SELECT ItemName FROM Items WHERE ItemNumber = 999; DROP TABLE USERS ","amount":1}' },
-            {url: '/v1/stockt', method: 'POST', data: '{"symbol":"/etc/passwd","transactionType":"buy","amount":1}' },
-            {url: '/v1/fuzzingattack', method: 'GET'},  
-        ];
+            const requests = [
+                {url: '/v1/stockt', method: 'POST', data: '{"symbol":"<script","transactionType":"buy","amount":1}' },
+                {url: '/v1/stockt', method: 'POST', data: '{"symbol":"ltc","transactionType":"SELECT ItemName FROM Items WHERE ItemNumber = 999; DROP TABLE USERS ","amount":1}' },
+                {url: '/v1/stockt', method: 'POST', data: '{"symbol":"/etc/passwd","transactionType":"buy","amount":1}' },
+                {url: '/v1/fuzzingattack', method: 'GET'},  
+            ];
 
-        while(true) { // infinite loop to start over when all requests have been processed
-            for(let i = 0; i < requests.length; i++) { // process each request
-            let item = requests[i];
-            let headers = { 'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('authUser')).jwt}` };
+            while(true) { // infinite loop to start over when all requests have been processed
+                for(let i = 0; i < requests.length; i++) { // process each request
+                    let item = requests[i];
+                    let headers = { 'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('authUser')).jwt}` };
 
-            let requestOptions = {
-                method: item.method,
-                headers: headers,
-            };
+                    let requestOptions = {
+                        method: item.method,
+                        headers: headers,
+                    };
 
-            if(item.method === 'POST') {
-                headers['Content-Type'] = 'application/json';
-                requestOptions.body = item.data;
+                    if(item.method === 'POST') {
+                        headers['Content-Type'] = 'application/json';
+                        requestOptions.body = item.data;
+                    }
+
+                    // Fetch returns a Promise that resolves to the Response to that request, whether it is successful or not
+                    await fetch(location.origin + item.url, requestOptions);
+
+                    await sleep(1000); // Wait for 3 seconds before the next request
+                }
             }
-
-            // Fetch returns a Promise that resolves to the Response to that request, whether it is successful or not
-            await fetch(location.origin + item.url, requestOptions);
-
-            await sleep(1000); // Wait for 3 seconds before the next request
-            }
-        }
         }
 
         runRequests();

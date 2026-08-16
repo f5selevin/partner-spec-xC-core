@@ -1,9 +1,9 @@
 IP Intelligence
 ###############
 
-One of the F5 XC security services is to identify bad sources based on the IP address.
+F5 Distributed Cloud IP Intelligence evaluates client source IP addresses against a continuously updated threat-intelligence database. When IP Reputation is enabled on an HTTP Load Balancer, requests from IP addresses associated with known malicious activity can be detected and handled according to the configured enforcement policy.
 
-This mechanism is continually updating the database and is able to flag many dirty IP addresses based on their malicious category: Spam Sources, Anonymous Proxies, Windows Exploits, Web Attacks, Botnets, Scanners, Reputation, Phishing, Mobile Threats, Tor Proxy, Denial of service, Network Attacks.
+IP Intelligence classifies matching source IP addresses into threat categories, including Spam Sources, Anonymous Proxies, Windows Exploits, Web Attacks, Botnets, Scanners, Reputation, Phishing, Mobile Threats, Tor Proxy, Denial of Service, and Network Attacks.
 
 
 
