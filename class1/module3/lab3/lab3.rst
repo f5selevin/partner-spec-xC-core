@@ -1,27 +1,3 @@
-Test Before Applying the Service Policies
-=========================================
-
-10. Before applying the service policies, send test requests to record the application's current behavior.
-
-a. Send a login request containing a valid email address. The request is expected to succeed.
-
-   .. code-block:: none
-
-      curl \
-        -H "Content-Type: application/json;charset=UTF-8" \
-        --data-raw '{"email":"satoshi@bitcoin.com","password":"bitcoin"}' \
-        http://arcadia-re-$$makeId$$.workshop.emea.f5se.com/v1/login
-
-b. Send a login request containing an invalid email value. The login is expected to fail at the application, but F5 Distributed Cloud Services will not block the request because the service policies have not yet been applied.
-
-   .. code-block:: none
-
-      curl \
-        -H "Content-Type: application/json;charset=UTF-8" \
-        --data-raw '{"email":"11223344","password":"bitcoin"}' \
-        http://arcadia-re-$$makeId$$.workshop.emea.f5se.com/v1/login
-
-
 Apply the Service Policies
 ==========================
 

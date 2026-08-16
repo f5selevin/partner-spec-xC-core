@@ -1,30 +1,76 @@
-Lab 1 - Rules config
-####################
+Service Policies for Parameter Validation
+#########################################
+
+A service policy is an ordered set of rules that matches HTTP request attributes, such as method, path, client, or parameter, and applies an action, such as allow or deny. F5 Distributed Cloud Services evaluates service policies in the order in which they are applied.
+
+This configuration applies positive security to **POST /v1/login**:
+
+1. Allow requests with an **email** parameter that matches the configured pattern.
+2. Deny all other **POST /v1/login** requests.
+3. Allow traffic to all other URLs.
+
+Default Allow Service Policy
+============================
+
+1. Create the catch-all policy that will allow traffic not matched by either login policy. In the F5 Distributed Cloud Console, navigate to **Web App & API Protection > Service Policies (1) > Service Policies (2)**, and then click **Add Service Policy (3)**. 
+   .. image:: ../pictures/sp-add.png      
+      :align: center
 
 
-1. Create the **default service policy** which will allow all
- 
-a) Web App & API Protection -> Service Policies -> Service Policies -> Add Service Policy -> Fill the bellow data -> Save and Exit
 
+2. In the appeared page fill the following values and click **Add Service Policy (3)**:
    .. table::
       :widths: auto
 
       ==============================    ========================================================================================
       Object                            Value
       ==============================    ========================================================================================
-      **Name**                          default-allow
-      
-      **Select Policy Rules**           Allow All Requests
+      **Name (1) **                     default-allow      
+      **Select Policy Rules (2)**       Allow All Requests
       ==============================    ========================================================================================
 
 
-   .. raw:: html   
+   .. image:: ../pictures/sp-default-allow-all.png
+      :align: center
 
-      <script>c1m3l1a();</script>  
+Allow Policy for Valid Login Requests
+=====================================
 
-2. Create the **service policy** which will verify that the email parameter value is in the appropiate email format
+1. Click **Add Service Policy** to create a new service policy that allows POST requests to **/v1/login** only when the **email** parameter matches the specified email address pattern. Configure the following values:
 
-a) Web App & API Protection -> Service Policies -> Service Policies -> Add Service Policy -> Fill the bellow data
+2. For the *Name* enter **arcadia-parameter-inspection**. 
+   .. image:: ../pictures/sp-parameter-details-1.png
+      :align: center
+
+   .. image:: ../pictures/sp-parameter-details-2.png
+      :align: center
+
+   .. image:: ../pictures/sp-parameter-details-3.png
+      :align: center
+
+   .. image:: ../pictures/sp-parameter-details-4.png
+      :align: center
+
+   .. image:: ../pictures/sp-parameter-details-5.png
+      :align: center
+
+   .. image:: ../pictures/sp-parameter-details-6.png
+      :align: center
+
+   .. image:: ../pictures/sp-parameter-details-7.png
+      :align: center
+
+   .. image:: ../pictures/sp-parameter-details-8.png
+      :align: center
+
+   .. image:: ../pictures/sp-parameter-details-9.png
+      :align: center
+
+   .. image:: ../pictures/sp-parameter-details-10.png
+      :align: center
+
+   .. image:: ../pictures/sp-res.png
+      :align: center
 
    .. table::
       :widths: auto
@@ -33,9 +79,23 @@ a) Web App & API Protection -> Service Policies -> Service Policies -> Add Servi
       Object                            Value
       ==============================    ========================================================================================
       **Name**                          arcadia-parameter-inspection
+
+      **Action**                        Allow
+      ==============================    ========================================================================================
+2. Create a specific **allow service policy** for login requests with an email parameter that matches the approved format. Navigate to **Web App & API Protection > Service Policies > Service Policies**, click **Add Service Policy**, and configure the following values:
+
+   .. table::
+      :widths: auto
+
+      ==============================    ========================================================================================
+      Object                            Value
+      ==============================    ========================================================================================
+      **Name**                          arcadia-parameter-inspection
+
+      **Action**                        Allow
       ==============================    ========================================================================================
 
-b) On the same page click Configure -> Add Item -> Fill the bellow data
+3. Under **Rules**, click **Configure > Add Item**, and configure the following values:
 
    .. table::
       :widths: auto
@@ -48,7 +108,7 @@ b) On the same page click Configure -> Add Item -> Fill the bellow data
       **HTTP Method**                   POST
       ==============================    ========================================================================================
 
-c) On the same page click Configure under the HTTP Path section -> Add Item under the Exact Values section -> Fill the bellow data -> Apply
+4. Under **HTTP Path**, click **Configure**. Under **Exact Values**, click **Add Item**, enter the following value, and click **Apply**:
 
    .. table::
       :widths: auto
@@ -59,7 +119,7 @@ c) On the same page click Configure under the HTTP Path section -> Add Item unde
       **Input box that just appeared**    /v1/login   
       ================================    ========================================================================================
 
-d) On the same page click the Show Advanced Fields switch under the Request Match section -> Add Item under Argument Matchers -> 
+5. Under **Request Match**, enable **Show Advanced Fields**. Under **Argument Matchers**, click **Add Item** and configure the following value:
 
    .. table::
       :widths: auto
@@ -70,7 +130,7 @@ d) On the same page click the Show Advanced Fields switch under the Request Matc
       **Argument Name**                  email
       ===============================    ========================================================================================
 
-c) On the same page click Add Item under the Regex Values section -> Fill the bellow data -> Apply -> Apply -> Apply -> Save and Exit
+6. Under **Regex Values**, click **Add Item** and configure the following values. Click **Apply** on each open configuration form, and then click **Save and Exit**:
 
    .. table::
       :widths: auto
@@ -82,56 +142,40 @@ c) On the same page click Add Item under the Regex Values section -> Fill the be
 
                                              [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}  
 
-      **Invert Matcher**                  Checked
+      **Invert Matcher**                  Unchecked
       ================================    ========================================================================================
 
    .. raw:: html   
 
     <script>c1m3l1b();</script>  
 
-3. Before we apply the **service policy** let's do some tests
+Deny Policy for Other Login Requests
+====================================
 
-a. First let's do a **curl** request that will simulate a user login request. All will be fine and we expect for the request to succeseed.
-
-   .. code-block:: none
-
-      curl -H "Content-Type: application/json;charset=UTF-8" --data-raw "{\"email\":\"satoshi@bitcoin.com\",\"password\":\"bitcoin\"}" http://arcadia-re-$$makeId$$.workshop.emea.f5se.com/v1/login
-
-b. Now we will re run the same request but with the email parameter value being just a number. We won't be able to login but the request will not be blocked.
-
-   .. code-block:: none
-
-      curl -H "Content-Type: application/json;charset=UTF-8" --data-raw "{\"email\":\"11223344\",\"password\":\"bitcoin\"}" http://arcadia-re-$$makeId$$.workshop.emea.f5se.com/v1/login
-
-
-4. Apply the **service policies** to the **HTTP Load Balancer**
-
-a) Web App & API Protection -> Load Balancers -> HTTP Load Balancer -> Click the 3 dots under the **arcadia-re-lb** row -> Manage Configuration -> Edit Configuration -> Fill the bellow data -> Save and Exit
-
+7. Create a service policy that denies POST requests to **/v1/login** that were not allowed by the valid-login policy. Navigate to **Web App & API Protection > Service Policies > Service Policies**, click **Add Service Policy**, and configure the following values:
 
    .. table::
       :widths: auto
 
-      ==================================    ========================================================================================
-      Object                                Value
-      ==================================    ========================================================================================
-      **Service Policies**                  Apply Specified Service Policies
-      ==================================    ========================================================================================
+      ==============================    ========================================================================================
+      Object                            Value
+      ==============================    ========================================================================================
+      **Name**                          arcadia-login-deny
 
-b) On the same page click Configure under Policies -> Add Item -> Fill the bellow data -> Apply -> Save and Exit
+      **Action**                        Deny
+      ==============================    ========================================================================================
+
+8. Under **Rules**, click **Configure > Add Item**, and configure the following values:
 
    .. table::
       :widths: auto
 
-      ==================================    ========================================================================================
-      Object                                Value
-      ==================================    ========================================================================================
-      **First Input Box**                   $$namespace$$/arcadia-parameter-inspection
+      ==============================    ========================================================================================
+      Object                            Value
+      ==============================    ========================================================================================
+      **Name**                          deny-other-login-requests
 
-      **Second Input Box**                  $$namespace$$/default-allow
-      ==================================    ========================================================================================
+      **HTTP Method**                   POST
+      ==============================    ========================================================================================
 
-
-   .. raw:: html   
-
-      <script>c1m3l1c();</script>
+9. Under **HTTP Path**, click **Configure**. Under **Exact Values**, click **Add Item**, enter **/v1/login**, and click **Apply**. Do not configure an argument matcher for this rule. Click **Apply** on each open configuration form, and then click **Save and Exit**.
