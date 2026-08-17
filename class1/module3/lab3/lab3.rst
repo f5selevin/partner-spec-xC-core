@@ -1,36 +1,46 @@
 Apply the Service Policies
-==========================
+##########################
 
-11. Apply the **service policies** to the **HTTP load balancer**.
-
-a. Navigate to **Web App & API Protection > Load Balancers > HTTP Load Balancer**. Open the actions menu for **arcadia-re-lb**, click **Manage Configuration > Edit Configuration**, and configure the following value:
+In order to protect the Arcadia application, apply the created service policies to the **arcadia-crypto-lb** HTTP load balancer.
 
 
-   .. table::
-      :widths: auto
+1. Navigate to **Web App & API Protection > Load Balancers (1) > HTTP Load Balancer (2)**. Click the **... (3)** button for **arcadia-crypto-lb**.
 
-      ==================================    ========================================================================================
-      Object                                Value
-      ==================================    ========================================================================================
-      **Service Policies**                  Apply Specified Service Policies
-      ==================================    ========================================================================================
-
-b. Under **Policies**, click **Configure > Add Item**. Add the policies in the following order, click **Apply**, and then click **Save and Exit**:
-
-   .. table::
-      :widths: auto
-
-      ==================================    ========================================================================================
-      Object                                Value
-      ==================================    ========================================================================================
-      **First policy**                      $$namespace$$/arcadia-parameter-inspection
-
-      **Second policy**                     $$namespace$$/arcadia-login-deny
-
-      **Third policy**                      $$namespace$$/default-allow
-      ==================================    ========================================================================================
+   .. image:: ../pictures/lb-list.png
+      :align: center
 
 
-   .. raw:: html   
+2. Click **Manage Configuration (1)**.
 
-      <script>c1m3l1c();</script>
+   .. image:: ../pictures/lb-manage-config.png
+      :align: center
+
+3. Click **Edit Configuration (1)**.
+
+   .. image:: ../pictures/lb-edit-config.png
+      :align: center
+
+4. Navigate to the **Common Security Controls (1)** section.
+
+   .. image:: ../pictures/lb-common-security-controls.png
+      :align: center
+
+5. Select **Apply Specified Service Policies (1)** for **Service Policies**, and click the **Configure (2)** link.
+
+   .. image:: ../pictures/lb-enable-service-policy.png
+      :align: center
+
+
+6. Click **Add Item (1)**, select ``$$namespace$$/arcadia-parameter-inspection`` for **(2)** and ``$$namespace$$/default-allow`` for **(3)**. Click **Apply (4)**.
+
+   .. image:: ../pictures/lb-enable-service-policy-2.png
+      :align: center
+
+.. warning::
+   Make sure that the order of policies is correct, the **arcadia-parameter-inspection** policy should be first and the **default-allow** policy should be second.
+
+
+7. Click **Save HTTP Load Balancer (1)**.
+
+   .. image:: ../pictures/lb-enable-service-policy-save.png
+      :align: center

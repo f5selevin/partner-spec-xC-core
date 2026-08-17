@@ -12,7 +12,7 @@ In this lab, you will configure the following behavior for **POST /v1/login**:
 Default Allow Service Policy
 ============================
 
-1. In the F5 Distributed Cloud Console, navigate to **Web App & API Protection > Service Policies (1) > Service Policies (2) ** and click **Add Service Policy (3)**.   
+1. In the F5 Distributed Cloud Console, navigate to **Web App & API Protection > Service Policies (1) > Service Policies (2)** and click **Add Service Policy (3)**.
 
    .. image:: ../pictures/sp-add.png
       :align: center
@@ -22,12 +22,12 @@ Default Allow Service Policy
    .. table::
       :widths: auto
 
-      =========================  ==================
-      Object                     Value
-      =========================  ==================
+      =============================  ==================
+      Object                         Value
+      =============================  ==================
       **Name (1)**                   default-allow
       **Select Policy Rules (2)**    Allow All Requests
-      =========================  ==================  
+      =============================  ==================
 
    .. image:: ../pictures/sp-default-allow-all.png
       :align: center
@@ -40,7 +40,7 @@ The **arcadia-parameter-inspection** service policy contains both login rules. T
 Create the Policy and Allow Rule
 --------------------------------
 
-1. Click **Add Service Policy**. Enter **arcadia-parameter-inspection** for **Name (1)**, in **Rules** section, near **Custom Rule List**, and click **Configure (2)**.
+1. Click **Add Service Policy**. Enter **arcadia-parameter-inspection** for **Name (1)**. In the **Rules** section, next to **Custom Rule List**, click **Configure (2)**.
 
    The screenshot highlights the policy name, **Custom Rule List**, and the **Configure** control used to open the rule list.
 
@@ -61,23 +61,30 @@ Create the Policy and Allow Rule
       Object               Value
       ===================  =============
       **Name (1)**         email
-      **Action (2) **      Allow
+      **Action (2)**       Allow
       **HTTP Method (3)**  POST
       ===================  =============
 
-   Under **Request Match** sectopn, click **Configure (4)** for **HTTP Path**.
+   In the **Request Match** section, click **Configure (4)** for **HTTP Path**.
 
-   The numbered callouts identify the rule name, **Allow** action, **POST** method, **HTTP Path** configuration control, and **HTTP Query Parameters > Add Item** control.
+   The numbered callouts identify the rule name, **Allow** action, **POST** method, **HTTP Path** configuration control, and **Argument Matchers > Add Item** control.
 
    .. image:: ../pictures/sp-parameter-details-3.png
       :align: center
 
-4. In the appeared dialog, under **Prefix Values**, click **Add Item (1)**, enter **/v1/login** **(2)**, and click **Apply (3)**.   
+4. In the dialog that appears, under **Prefix Values**, click **Add Item (1)**, enter **/v1/login (2)**, and click **Apply (3)**.
 
    .. image:: ../pictures/sp-parameter-details-4.png
       :align: center
 
-5. The **HTTP path** dialog will close. Click **Add Item (5)** under **HTTP Query Parameters**. Configure the query parameter matcher with these values:
+5. The **HTTP Path** dialog closes. Click **Show Advanced Fields (5)** in the **Request Match** section.
+
+6. In the expanded section, locate **Argument Matchers** and click **Add Item (1)**. For POST requests, parameters extracted from the JSON body are evaluated by **Argument Matchers**.
+
+   .. image:: ../pictures/sp-parameter-details-5.png
+      :align: center
+
+7. Specify **Argument Name (1)** and click **Add Item (2)**. Configure the argument matcher with the following values:
 
    .. table::
       :widths: auto
@@ -85,21 +92,21 @@ Create the Policy and Allow Rule
       ======================================  =================================================
       Object                                  Value
       ======================================  =================================================
-      **Query Parameter Name (1)**                email      
-      **Regex Values (3) **                        [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}      
+      **Argument Name (1)**                   email
+      **Regex Values (3)**                    [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}
       ======================================  =================================================
 
-   Click **Apply (4)** to save the query parameter matcher.   
+   Click **Apply (4)** to save the argument matcher.
 
-   .. image:: ../pictures/sp-parameter-details-5.png
+   .. image:: ../pictures/sp-parameter-details-5a.png
       :align: center
 
-6. Verify that **HTTP Path** is configured and that the **HTTP Query Parameters** table contains the **email** matcher. Click **Apply (1)** to save the rule.
+8. Verify that **HTTP Path** is configured and that the **Argument Matchers** table contains the **email** matcher. Click **Apply (1)** to save the rule.
 
    .. image:: ../pictures/sp-parameter-details-6.png
       :align: center
 
-7. The **email** rule is first in the **Rules** list. Click **Add Item** to create the fallback deny rule.   
+9. The **email** rule is first in the **Rules** list. Click **Add Item** to create the fallback deny rule.
 
    .. image:: ../pictures/sp-parameter-details-7.png
       :align: center
@@ -115,18 +122,19 @@ Add the Fallback Deny Rule
       ===================  =============
       Object               Value
       ===================  =============
-      **Name (1)**             deny-others
-      **Action (2)**           Deny
-      **HTTP Method (3)**      POST
+      **Name (1)**         deny-others
+      **Action (2)**       Deny
+      **HTTP Method (3)**  POST
       ===================  =============
 
-   Under **HTTP Path**, click **Configure**, add **/v1/login** to **Prefix Values**, and click **Apply**. Do not add an HTTP query parameter matcher to this rule. Click **Apply (5)** to save the rule.
+   Under **HTTP Path**, click **Configure**, add **/v1/login** to **Prefix Values**, and click **Apply**. Do not add an argument matcher to this rule. Click **Apply (5)** to save the rule.
 
    .. image:: ../pictures/sp-parameter-details-8.png
       :align: center
 
-Verify the rule order
+Verify the Rule Order
 ---------------------
+
 1. The order of the rules is important. The **arcadia-parameter-inspection** service policy must contain the following rules in this order:
 
    1. **email** — allows matching login requests.
@@ -137,13 +145,14 @@ Verify the rule order
    .. image:: ../pictures/sp-parameter-details-9.png
       :align: center      
 
-Click **Apply (1)** to return to the service policy form
+2. Click **Apply (1)** to return to the service policy form.
 
-2. Click **Add Service Policy (1)** to save the service policy.
-    .. image:: ../pictures/sp-parameter-details-10.png
-       :align: center
+3. Click **Add Service Policy (1)** to save the service policy.
 
-4. On the **Service Policies** page, verify that both **arcadia-parameter-inspection** and **default-allow** are listed. The **Rule Count** for **arcadia-parameter-inspection** should be **2**.    
+   .. image:: ../pictures/sp-parameter-details-10.png
+      :align: center
 
-    .. image:: ../pictures/sp-res.png
-       :align: center
+4. On the **Service Policies** page, verify that both **arcadia-parameter-inspection** and **default-allow** are listed. The **Rule Count** for **arcadia-parameter-inspection** should be **2**.
+
+   .. image:: ../pictures/sp-res.png
+      :align: center
