@@ -9,7 +9,7 @@ The steps bellow describe how to create a new F5 account.
 
 If you have any **issues** please contact you workshop host.
 
-1. Go to the the **F5 account registration page** ( :ext_link:`https://account.f5.com/myf5/signin/register/` ) and fill in the requested information
+1. Go to the the **F5 account registration page** (:ext_link:`https://account.f5.com/myf5/signin/register/`) and fill in the requested information
 
    .. image:: ../pictures/Slide1.png
       :align: center
