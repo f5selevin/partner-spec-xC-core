@@ -1,66 +1,90 @@
 Configure Malicious User Detection
 #######################################
 
+Enable Malicious User Detection on the HTTP Load Balancer
+=========================================================
 
-1. Enabling Malicious User Detection is done at the **HTTP Load Balancer** level. In our example we will enable only **Spam Sources** and **Anonymous Proxies**
+1. Navigate to **Web App & API Protection > Load Balancers (1) > HTTP Load Balancers (2)**. In the row for the created load balancer, click the **Actions** menu (3).
 
-a) Web App & API Protection -> Load Balancers -> HTTP Load Balancer -> Click the 3 dots under the **arcadia-re-lb** row -> Manage Configuration -> Edit Configuration -> Fill the bellow data
+   .. image:: ../pictures/lb-list.png
+      :align: center
 
+2. In the **Actions** menu, click **Manage Configuration (1)**.
 
-   .. table::
-      :widths: auto
+   .. image:: ../pictures/lb-list-manage.png
+      :align: center
 
-      ============================================    ========================================================================================
-      Object                                          Value
-      ============================================    ========================================================================================
-      **Malicious User Detection**                    Enable
+3. On the load balancer configuration page, click **Edit Configuration (1)**.
 
-      **Malicious User Mitigation And Challenges**    Enable
-   
-      **User Identifier**                             Under the new **User Identification Policy** field choose **Add Item**
-      ============================================    ========================================================================================
+   .. image:: ../pictures/lb-list-edit.png
+      :align: center
 
-b) Fill the bellow data -> **Configure**
-
-   .. table::
-      :widths: auto
-
-      ==========================================    ========================================================================================
-      Object                                        Value
-      ==========================================    ========================================================================================
-      **Name**                                      arcadia-user-identification
-      ==========================================    ========================================================================================
-
-c) Click **Add Item** -> Fill the bellow data -> Apply
+4. Select **Common Security Controls (1)** and configure the highlighted fields as follows:
 
    .. table::
       :widths: auto
 
-      ==========================================    ========================================================================================
-      Object                                        Value
-      ==========================================    ========================================================================================
-      **Identifier Type**                           HTTP Header Name
+      ==================================  ==========================
+      Object                              Value
+      ==================================  ==========================
+      **Malicious User Detection (2)**    Enable
+      **User Identifier (3)**             User Identification Policy
+      ==================================  ==========================
 
-      **HTTP Header Name**                          Authorization
-      ==========================================    ========================================================================================
+   Open the **User Identification Policy (4)** selector to choose a policy.
 
-d) Click **Add Item** -> Fill the bellow data -> Apply -> Apply -> Continue -> Save and Exit
+   .. image:: ../pictures/lb-malicious-users-details-1.png
+      :align: center
+
+5. Open **User Identification Policy** and click **Add Item (1)** to create one.
+
+   .. image:: ../pictures/lb-malicious-users-details-2.png
+      :align: center
+
+6. Configure the new user identification policy with the following value, and then click **Configure (2)** under **User Identification Rules**.
 
    .. table::
       :widths: auto
 
-      ==========================================    ========================================================================================
-      Object                                        Value
-      ==========================================    ========================================================================================
-      **Identifier Type**                           Client IP Address
-      ==========================================    ========================================================================================
+      ==================  ======================================
+      Object              Value
+      ==================  ======================================
+      **Name (1)**        arcadia-crypto-user-identification
+      ==================  ======================================
 
+   .. image:: ../pictures/lb-malicious-users-details-3.png
+      :align: center
 
+7. The **User Identification Rules** list is initially empty. Click **Add Item (1)**.
 
-   .. raw:: html   
+   .. image:: ../pictures/lb-malicious-users-details-4.png
+      :align: center
 
-      <script>c1m5l1a();</script>  
+8. Configure the user identification rule with the following value, and then click **Apply (2)**.
 
-   .. raw:: html   
+   .. table::
+      :widths: auto
 
-      <script>c1m5l1b();</script>        
+      =========================  =================
+      Object                     Value
+      =========================  =================
+      **Identifier Type (1)**    Client IP Address
+      =========================  =================
+
+   .. image:: ../pictures/lb-malicious-users-details-5.png
+      :align: center
+
+9. Verify that the rules list contains one rule with **Identifier Type** set to **IP Address**, and then click **Apply (1)**.
+
+   .. image:: ../pictures/lb-malicious-users-details-6.png
+      :align: center
+
+10. Verify that **User Identification Rules** is shown as **Configured**, and then click **Add User Identification (1)** to create the policy.
+
+    .. image:: ../pictures/lb-malicious-users-details-7.png
+       :align: center
+
+11. Back under **Common Security Controls** and click **Save HTTP Load Balancer (1)**.
+
+    .. image:: ../pictures/lb-malicious-users-details-8.png
+       :align: center
