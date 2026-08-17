@@ -1,9 +1,15 @@
 Test Malicious User Detection
 #############################
 
+Generate Malicious Traffic
+==========================
+
 In order to test we will behave as a bad actor.
 
-1. Browse to the app :ext_link:`http://arcadia-re-$$makeId$$.workshop.emea.f5se.com/` and login
+.. danger::
+   Generate this malicious traffic only against the website assigned to you for this lab. Verify the target URL before running the script, and do not use it to attack or test any other website.
+
+1. Browse to the app :ext_link:`http://$$namespace$$.spec-core.f5se.com/` and login
 
    .. table::
       :widths: auto
@@ -11,28 +17,26 @@ In order to test we will behave as a bad actor.
       ==========================================    ========================================================================================
       Object                                        Value
       ==========================================    ========================================================================================
-      **Username**                                  satoshi@bitcoin.com
-   
+      **Username**                                  satoshi@bitcoin.com   
       **Password**                                  bitcoin
       ==========================================    ========================================================================================
 
 
-2. Now we have access to authenticated APIs which we now can try and break. Copy and paste the bellow Javascript code into your brower console.
-   The code will try and attack the internal APIs of the application that can only be accessed after authentication.
+2. Now we have access to authenticated APIs that we can try to break. Copy and paste the JavaScript code below into your browser console.
+   The code attacks internal APIs that can only be accessed after authentication. It logs the HTTP status of each request and continues until you reload the page.
 
    .. code::
-
         // A helper function to delay execution
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
         async function runRequests() {
-            const requests = [
+            const requests = [                
                 {url: '/v1/stockt', method: 'POST', data: '{"symbol":"<script","transactionType":"buy","amount":1}' },
                 {url: '/v1/stockt', method: 'POST', data: '{"symbol":"ltc","transactionType":"SELECT ItemName FROM Items WHERE ItemNumber = 999; DROP TABLE USERS ","amount":1}' },
                 {url: '/v1/stockt', method: 'POST', data: '{"symbol":"/etc/passwd","transactionType":"buy","amount":1}' },
-                {url: '/v1/fuzzingattack', method: 'GET'},  
+                {url: '/v1/fuzzingattack', method: 'GET'},
             ];
 
             while(true) { // infinite loop to start over when all requests have been processed
@@ -50,26 +54,35 @@ In order to test we will behave as a bad actor.
                         requestOptions.body = item.data;
                     }
 
-                    // Fetch returns a Promise that resolves to the Response to that request, whether it is successful or not
-                    await fetch(location.origin + item.url, requestOptions);
+                    try {
+                        const response = await fetch(location.origin + item.url, requestOptions);
+                        console.log(`${item.method} ${item.url}: HTTP ${response.status}`);
+                    } catch (error) {
+                        console.error(`${item.method} ${item.url} failed:`, error);
+                    }
 
-                    await sleep(1000); // Wait for 3 seconds before the next request
+                    await sleep(1000); // Wait for 1 second before the next request
                 }
             }
         }
 
-        runRequests();
+        console.log('Starting requests. Reload the page to stop.');
+        void runRequests();
 
-3. In the browser network tab follow the request and you will observe that after some short time F5 XC will start blocking the user by returning a HTTP 403
+3. Monitor the browser console until the malicious ``POST`` requests to ``/v1/stockt`` return **HTTP 403 Forbidden**. This confirms that the requests are being blocked.
 
-   We will be able to track this user in the F5XC console to **Web App & API Protection** -> **Dashboards** -> **Security** -> Click on the **arcadia-re-lb** Load Balancer -> **Malicious Users** -> **Refresh**
+   .. image:: ../pictures/block-403.png
+      :align: center
 
-4. Hacker understands that he can't attack the internal APIs and decides to move to public endpoints. We will simulate this by browsing to the following URLs :ext_link:`http://arcadia-re-$$makeId$$.workshop.emea.f5se.com/?a=/etc/passwd`  and holding **F5 button** on the keyboard to generate multiple requests
+Review the Detected Malicious Activity
+======================================
 
-5. Since the user has not logged in we will block it based on IP address go to the **Malicious Users** dashboard like in step 3 and you will be able to follow and indetify these attacks
+1. In the F5 Distributed Cloud Console, navigate to **Web App & API Protection > Overview > Security**. On the **Dashboard** tab, verify that security events are displayed and that ``/v1/stockt`` and ``/v1/fuzzingattack`` appear under **Top Attacked Paths**.
 
-6. Your IP address is now blocked temporarily. Add it to the allow list before continuing.
+   .. image:: ../pictures/security-dashboard.png
+      :align: center
 
-   Go to the **Malicious Users** dashboard and click on the IP identifier ( it should look similar to this **IP-156.33.44.55** ) -> Click **Add To Allow List** -> Apply -> Apply -> Save and Exit
+2. Click the **Malicious Users (2)** tab and review the **Attacked Delivery Resources** map for the detected malicious-user activity.
 
-7. Close all previous application tabs and open a new one, when browsing :ext_link:`http://arcadia-re-$$makeId$$.workshop.emea.f5se.com/` the app will be fine.
+   .. image:: ../pictures/security-malicious-users-dashboard.png
+      :align: center
