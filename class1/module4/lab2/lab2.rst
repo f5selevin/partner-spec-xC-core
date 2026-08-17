@@ -1,19 +1,19 @@
 Test IP Intelligence
 ####################
 
-In order to test we will use an online free proxy server.
+Use an external open proxy to send a request from an IP address categorized as an anonymous proxy and verify that IP Intelligence blocks the request.
 
-To perform this test you can use any of the following proxy sites:
+1. In the UDF environment, locate the **Client (1)** component. Click **Access**, and then click **FIREFOX (2)** to open Firefox.
 
+   .. image:: ../pictures/udf-client-ff.png
+      :align: center
 
-:ext_link:`https://www.hidemyass.com/en-us/proxy`
+2. In Firefox, navigate to https://hide.me/en/proxy. The URL is also available in the bookmarks.
 
-:ext_link:`https://hide.me/en/proxy`
+3. Enter ``http://$$namespace$$.spec-core.f5se.com`` in the proxy URL field and click **Go**.
 
+4. The request will be blocked with a **403 Forbidden** response.
 
-
-1. Use proxy server of you choosing and enter the Arcadia Crypto App URL: :ext_link:`http://arcadia-re-$$makeId$$.workshop.emea.f5se.com/`
-
-2. The requests coming from the proxy servers will be blocked with a 403 status code.
-
+.. warning::
+   Open proxies are untrusted. Use the proxy only for this lab request. Do not send credentials, cookies, tokens, or sensitive information through it.
 

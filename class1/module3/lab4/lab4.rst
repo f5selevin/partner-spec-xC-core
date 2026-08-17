@@ -1,6 +1,13 @@
 Test the Application After Enabling the WAF Rules
 ##################################################
 
+In the UDF environment, locate the **Client (1)** component. Click **Access**, and then click **Web Shell (2)** to open a terminal.
+
+.. image:: ../pictures/udf-client-webshell.png
+   :align: center
+
+Run the following commands:
+
 1. Let's see what have changed first let's make sure the good login is working
 
    .. code-block:: none

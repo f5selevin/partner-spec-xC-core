@@ -1,11 +1,9 @@
 IP Intelligence
 ###############
 
-F5 Distributed Cloud IP Intelligence evaluates client source IP addresses against a continuously updated threat-intelligence database. When IP Reputation is enabled on an HTTP Load Balancer, requests from IP addresses associated with known malicious activity can be detected and handled according to the configured enforcement policy.
+F5 Distributed Cloud IP Intelligence evaluates client source IP addresses against a continuously updated threat-intelligence database and identifies addresses associated with known malicious activity.
 
-IP Intelligence classifies matching source IP addresses into threat categories, including Spam Sources, Anonymous Proxies, Windows Exploits, Web Attacks, Botnets, Scanners, Reputation, Phishing, Mobile Threats, Tor Proxy, Denial of Service, and Network Attacks.
-
-
+In this module, you will enable IP Intelligence for **Spam Sources** and **Anonymous Proxies** on the HTTP Load Balancer. You will then send traffic through a public proxy and verify that the request is blocked with a 403 response.
 
 **Hands-on exercises**
 

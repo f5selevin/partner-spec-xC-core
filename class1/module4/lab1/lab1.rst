@@ -2,10 +2,26 @@ Configure IP Intelligence
 #############################
 
 
-1. Enabling IP Intelligence it is very simple and it is done at the **HTTP Load Balancer** level. In our example we will enable only **Spam Sources** and **Anonymous Proxies**
+1. Navigate to **Web App & API Protection > Load Balancers (1) > HTTP Load Balancer (2)**. Click the **... (3)** button for **arcadia-crypto-lb**.
 
-a) Web App & API Protection -> Load Balancers -> HTTP Load Balancer -> Click the 3 dots under the **arcadia-re-lb** row -> Manage Configuration -> Edit Configuration -> Fill the bellow data -> Save and Exit
+   .. image:: ../pictures/lb-list.png
+      :align: center
 
+
+2. Click **Manage Configuration (1)**.
+
+   .. image:: ../pictures/lb-manage-config.png
+      :align: center
+
+3. Click **Edit Configuration (1)**.
+
+   .. image:: ../pictures/lb-edit-config.png
+      :align: center
+
+4. Navigate to **Common Security Controls (1)**, enable **IP Reputation (2)**, and select **Spam Sources** and **Anonymous Proxies (3)** from the list of IP threat categories. Click **Save HTTP Load Balancer (4)**.
+
+   .. image:: ../pictures/lb-ip-reputation.png
+      :align: center
 
    .. table::
       :widths: auto
@@ -17,7 +33,3 @@ a) Web App & API Protection -> Load Balancers -> HTTP Load Balancer -> Click the
    
       **List of IP Threat Categories to choose**    Spam Sources, Anonymous Proxies
       ==========================================    ========================================================================================
-
-   .. raw:: html   
-
-      <script>c1m4l1a();</script>  
