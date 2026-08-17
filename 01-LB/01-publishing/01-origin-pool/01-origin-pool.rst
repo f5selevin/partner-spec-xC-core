@@ -1,4 +1,4 @@
-Create the Arcadia Crypto origin pool
+Create the Arcadia Origin Pool
 ######################################
 
 In this exercise, you will identify the three Arcadia Crypto application endpoints provided by UDF and add all three endpoints as origin servers in one F5 Distributed Cloud origin pool.
@@ -12,7 +12,7 @@ Discover the Arcadia Crypto endpoints
 
    .. react:: DeploymentAccessMethods
       :deployment: Arcadia Crypto - Cluster
-      :access-methods: Arcadia Crypto Origin Pool 1, Arcadia Crypto Origin Pool 2, Arcadia Crypto Origin Pool 3
+      :access-methods: Arcadia Origin Pool 1, Arcadia Origin Pool 2, Arcadia Origin Pool 3
 
 3. Record each URL. You will use all three hostnames when you configure the origin servers.
 
@@ -22,19 +22,19 @@ Discover the Arcadia Crypto endpoints
 Verify the Arcadia Crypto endpoints
 ===================================
 
-1. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 1` in a new browser tab.
+1. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Origin Pool 1` in a new browser tab.
 
 2. Confirm that **Origin Pool 1** appears in the page header and footer.
 
 .. image:: ../pictures/arcadia-crypto-op1.png
    :align: center
 
-3. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 2` and confirm that **Origin Pool 2** appears in the header and footer.
+3. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Origin Pool 2` and confirm that **Origin Pool 2** appears in the header and footer.
 
 .. image:: ../pictures/arcadia-crypto-op2.png
    :align: center
 
-4. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 3` and confirm that **Origin Pool 3** appears in the header and footer.
+4. Open :deployment-access-method:`Arcadia Crypto - Cluster|Arcadia Origin Pool 3` and confirm that **Origin Pool 3** appears in the header and footer.
 
 .. image:: ../pictures/arcadia-crypto-op3.png
    :align: center
@@ -83,7 +83,7 @@ In this lab, all three Arcadia Crypto endpoints are added to one origin pool as 
       Object                            Value
       ==============================    =========================================================
       **Origin Server Type (1)**        Public NS Name or Origin Server
-      **DNS Name (2)**                  :deployment-access-method-url:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 1`
+      **DNS Name (2)**                  :deployment-access-method-url:`Arcadia Crypto - Cluster|Arcadia Origin Pool 1`
       ==============================    =========================================================
 
 7. Click **Apply (3)** to add the origin server.
@@ -97,8 +97,8 @@ In this lab, all three Arcadia Crypto endpoints are added to one origin pool as 
 
 9.  Repeat steps 5 through 7 for the other two UDF URLs:
 
-   * Add the hostname from the **Arcadia Crypto Origin Pool 2** URL: :deployment-access-method-url:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 2`.
-   * Add the hostname from the **Arcadia Crypto Origin Pool 3** URL: :deployment-access-method-url:`Arcadia Crypto - Cluster|Arcadia Crypto Origin Pool 3`.
+   * Add the hostname from the **Arcadia Origin Pool 2** URL: :deployment-access-method-url:`Arcadia Crypto - Cluster|Arcadia Origin Pool 2`.
+   * Add the hostname from the **Arcadia Origin Pool 3** URL: :deployment-access-method-url:`Arcadia Crypto - Cluster|Arcadia Origin Pool 3`.
 
 10. Confirm that the origin pool contains three origin servers, and then click **Add Origin Pool (1)**.
     .. image:: ../pictures/op-os-res-2.png

@@ -57,9 +57,9 @@ Test round-robin distribution
 
 4. Refresh the page several times. Confirm that the header and footer rotate among:
 
-   * **Arcadia Crypto Origin Pool 1**
-   * **Arcadia Crypto Origin Pool 2**
-   * **Arcadia Crypto Origin Pool 3**
+   * **Arcadia Origin Pool 1**
+   * **Arcadia Origin Pool 2**
+   * **Arcadia Origin Pool 3**
 
 .. note:: A browser or intermediary may reuse an existing connection. If the displayed origin does not change, perform additional refreshes or open the URL in a new private browsing window.
 
