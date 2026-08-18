@@ -16,4 +16,4 @@ In order to make sure all is going to the correct endpoint we will need to relog
    **Password**                                  bitcoin
    ==========================================    ========================================================================================
 
-1. The login will hang as there is no backend service to handle the request. This is expected as the backend services are still running in the on-premises environment and are not reachable from the AWS.
+3. The login will hang as there is no backend service to handle the request. This is expected as the backend services are still running in the on-premises environment and are not reachable from the AWS.
