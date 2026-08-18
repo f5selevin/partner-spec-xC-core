@@ -11,6 +11,16 @@ Use an external open proxy to send a request from an IP address categorized as a
    .. image:: ../pictures/udf-client-ff.png
       :align: center
 
+The login and password are:
+
+   .. table::
+      :widths: auto
+
+      ==========================================    ========================================================================================
+      **Login**                                     admin
+      **Password**                                  admin
+      ==========================================    ========================================================================================
+
 2. In Firefox, navigate to https://hide.me/en/proxy. The URL is also available in the bookmarks.
 
 3. Enter ``http://$$namespace$$.spec-core.f5se.com`` in the proxy URL field and click **Go**.
