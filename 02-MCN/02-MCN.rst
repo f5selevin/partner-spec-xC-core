@@ -1,6 +1,8 @@
 Multi-Cloud Networking
 ######################
 
+Exercise Overview
+====================
 This section covers F5 Distributed Cloud Multi-Cloud Networking (MCN).
 
 These exercises use the **Arcadia Crypto** application.
@@ -30,14 +32,22 @@ In this section, you will:
    :align: center
 
 
-.. image:: ./01-migration/pictures/class1.gif
-   :align: center
+Secure Mesh Sites
+=================
+The lab uses two F5 Distributed Cloud Customer Edge (CE) sites: one in AWS for the Arcadia frontend and one in the on-premises environment for the backend services. Each CE establishes encrypted connectivity to the F5 Global Network. Both sites must complete registration and provisioning before routes and application traffic can be exchanged between the environments.
 
-.. image:: ./pictures/mcn-navigate.png
-   :align: center
+1. In the F5 Distributed Cloud Console, open **Select Workspace (1)**, then select **Multi-Cloud Network Connect (2)**.
 
-.. image:: ./pictures/mcn-sms-list.png
-   :align: center
+   .. image:: ./pictures/mcn-navigate.png
+      :align: center
+
+2. Verify that the ``smsv2-$$namespace$$`` on-premises CE site and the ``spec-core-aws-frontend`` AWS CE site both report **Online**. This status confirms that each CE has completed provisioning and established connectivity to the F5 Global Network. If either site is not online, wait for provisioning to complete, then click **Refresh**.
+
+   .. image:: ./pictures/mcn-sms-list.png
+      :align: center
+
+.. note::
+   On-premise CE start might take up to 20 minutes. If its longer than that, check the CE logs for errors.
 
 **Workshop topics**
 
